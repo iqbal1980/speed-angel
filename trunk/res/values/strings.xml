@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="hello">Hello World</string>
-    <string name="app_name">Speed Ticker</string>
+    <string name="app_name">Speed Angel</string>
     <string name="sample_pref_click_pop_up">Click to pop up a list to choose from</string>
     <string name="sample_pref_sel_dialog">Select max allowable speed limit</string>
     <string name="sample_pref_choose_number">Choose speed limit</string>
@@ -13,7 +13,7 @@
     <string name="sample_pref_summary">Preference Summary</string>
     <string name="sample_pref_other_ckb">Another Checkbox</string>
     <string name="sample_pref_other_screen">Another Preference Screen</string>
-    <string name="sample_pref_ckb">Enable Speed Ticker service</string>
+    <string name="sample_pref_ckb">Enable Speed Angel service</string>
     <string name="sample_pref_txt_dialog">Text Entry Dialog</string>
     <string name="sample_pref_enter_txt">Enter something</string>
     <string-array name="numbers">
@@ -21,12 +21,6 @@
         <item>10</item>
         <item>15</item>
         <item>20</item>
-    </string-array>
-    <string-array name="numbernames">
-        <item>5mph</item>
-        <item>10mph</item>
-        <item>15mph</item>
-        <item>20mph</item>
     </string-array>
     <color name="white">#FFFFFF</color>
 </resources>

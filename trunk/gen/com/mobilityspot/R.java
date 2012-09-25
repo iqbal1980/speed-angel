@@ -9,7 +9,6 @@ package com.mobilityspot;
 
 public final class R {
     public static final class array {
-        public static final int numbernames=0x7f060001;
         public static final int numbers=0x7f060000;
     }
     public static final class attr {
@@ -20,11 +19,13 @@ public final class R {
     public static final class drawable {
         public static final int angel=0x7f020000;
         public static final int ic_launcher=0x7f020001;
+        public static final int splash=0x7f020002;
     }
     public static final class id {
         public static final int blocktext=0x7f080000;
         public static final int button1=0x7f080002;
         public static final int imageView1=0x7f080001;
+        public static final int rootRL=0x7f080006;
         public static final int textView1=0x7f080003;
         public static final int textView2=0x7f080004;
         public static final int textView3=0x7f080005;
@@ -33,6 +34,7 @@ public final class R {
         public static final int blocker=0x7f030000;
         public static final int dummy=0x7f030001;
         public static final int main=0x7f030002;
+        public static final int splash=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f050001;
