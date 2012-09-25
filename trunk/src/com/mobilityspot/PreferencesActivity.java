@@ -42,6 +42,7 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
 			String key) {
+				//Todos by Sudhaker
 				Intent iServ = new Intent();
 				iServ.setClass(this, SpeedTrackingService.class); 
 				this.stopService(iServ);
