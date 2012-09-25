@@ -13,10 +13,11 @@
 
 package com.mobilityspot;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-
-import com.mobilityspot.R;
 
 /***
  * PreferenceActivity is a built-in Activity for preferences management
@@ -29,12 +30,22 @@ import com.mobilityspot.R;
  * <Preference Type> preferenceValue = sharedPreferences.get<Preference
  * Type>("<Preference Key>",<default value>);
  */
-public class PreferencesActivity extends PreferenceActivity {
+public class PreferencesActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener  {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.samplepreferences);
+		
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
+				Intent iServ = new Intent();
+				iServ.setClass(this, SpeedTrackingService.class); 
+				this.stopService(iServ);
+				this.startService(iServ);
 		
 	}
 }
