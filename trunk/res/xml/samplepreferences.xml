@@ -24,4 +24,5 @@
 						android:entryValues="@array/numbers"
 						android:dialogTitle="@string/sample_pref_choose_number" />
 	</PreferenceCategory>
+	
 </PreferenceScreen>
