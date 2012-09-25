@@ -93,6 +93,13 @@ public class SpeedTrackingService extends Service implements LocationListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public int onStartCommand (Intent intent, int flags, int startId) {
+		Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
+		 return START_STICKY;
+	
+	}
 }
 
 
