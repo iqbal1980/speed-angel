@@ -28,4 +28,5 @@
         <item>15mph</item>
         <item>20mph</item>
     </string-array>
+    <color name="white">#FFFFFF</color>
 </resources>

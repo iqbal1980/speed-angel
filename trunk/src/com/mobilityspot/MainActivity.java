@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				try {
-					Intent iExp = new Intent(MainActivity.this, BasicActivity.class);
+					Intent iExp = new Intent(MainActivity.this, ScreenBlockingActivity.class);
 					 iExp.putExtra("speed1", "0");
 					startActivity(iExp);
 				}

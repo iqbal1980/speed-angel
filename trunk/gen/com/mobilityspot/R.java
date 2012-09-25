@@ -14,15 +14,20 @@ public final class R {
     }
     public static final class attr {
     }
+    public static final class color {
+        public static final int white=0x7f070000;
+    }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int angel=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int blocktext=0x7f070000;
-        public static final int button1=0x7f070001;
-        public static final int textView1=0x7f070002;
-        public static final int textView2=0x7f070003;
-        public static final int textView3=0x7f070004;
+        public static final int blocktext=0x7f080000;
+        public static final int button1=0x7f080002;
+        public static final int imageView1=0x7f080001;
+        public static final int textView1=0x7f080003;
+        public static final int textView2=0x7f080004;
+        public static final int textView3=0x7f080005;
     }
     public static final class layout {
         public static final int blocker=0x7f030000;
