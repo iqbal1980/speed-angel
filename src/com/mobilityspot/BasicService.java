@@ -42,12 +42,12 @@ public class BasicService extends Service implements LocationListener {
          String speedStr = Double.toString(speedDbl);
 
  
-         Singleton sgl = Singleton.getInstance();
-         System.out.println(">>>>>>>>>>>>>> Speed ===== *****"+speedStr +"SINGLETON ON ===" +sgl.isOn);
+         ActivityOrderingSingleton sgl = ActivityOrderingSingleton.getInstance();
+         System.out.println(">>>>>>>>>>>>>> Speed ===== *****"+speedStr +"SINGLETON ON ===" +sgl.isActivityOnTop);
 		 
          if(speedDbl > -1) { 
-			 if(sgl.isOn == false) {
-		         Intent iExp = new Intent(this, BasicActivity.class);
+			 if(sgl.isActivityOnTop == false) {
+		         Intent iExp = new Intent(this, ScreenBlockingActivity.class);
 		         iExp.putExtra("speed1", speedStr);
 				 iExp.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				 startActivity(iExp);

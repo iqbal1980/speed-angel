@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <service android:name=".BasicService"/>
-        <activity android:name=".BasicActivity"/>
+        <activity android:name=".ScreenBlockingActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <receiver android:name=".BasicReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
