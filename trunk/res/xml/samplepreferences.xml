@@ -15,4 +15,15 @@
 						android:dialogTitle="@string/sample_pref_choose_number" />
 	</PreferenceCategory>
 	
+	
+		<PreferenceCategory android:title="@string/speed_units_preferences">
+							android:summary="Speed Units Preferences"/>
+		<ListPreference android:key="listOfSpeedUnits"
+						android:title="@string/sample_pref_sel_dialog" 
+						android:summary="@string/sample_pref_click_pop_up"
+						android:entries="@array/speedUnits"
+						android:entryValues="@array/speedUnits"
+						android:dialogTitle="@string/sample_pref_choose_speed_unit" />
+	</PreferenceCategory>
+	
 </PreferenceScreen>

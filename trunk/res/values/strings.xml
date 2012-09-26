@@ -5,6 +5,7 @@
     <string name="sample_pref_click_pop_up">Click to pop up a list to choose from</string>
     <string name="sample_pref_sel_dialog">Select max allowable speed limit</string>
     <string name="sample_pref_choose_number">Choose speed limit</string>
+    <string name="sample_pref_choose_speed_unit">Choose speed unit</string>
     <string name="sample_pref_check_it">Check It</string>
     <string name="sample_pref_add_prefs">Additional preferences</string>
     <string name="sample_pref_categ_3">Speed settings</string>
@@ -16,11 +17,21 @@
     <string name="sample_pref_ckb">Enable Speed Angel service</string>
     <string name="sample_pref_txt_dialog">Text Entry Dialog</string>
     <string name="sample_pref_enter_txt">Enter something</string>
+    <string name="speed_units_preferences">Speed Units Preferences</string>
     <string-array name="numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
         <item>5</item>
         <item>10</item>
         <item>15</item>
         <item>20</item>
+    </string-array>
+    <string-array name="speedUnits">
+        <item>mph</item>
+        <item>kph</item>
+        <item>m/s</item>
     </string-array>
     <color name="white">#FFFFFF</color>
 </resources>
