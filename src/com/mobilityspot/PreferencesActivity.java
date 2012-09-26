@@ -13,6 +13,8 @@
 
 package com.mobilityspot;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -42,14 +44,38 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 
 			prefs.registerOnSharedPreferenceChangeListener(this);
 	}
+	
+	private Boolean isServiceRunning(String serviceName) {
+		
+		 ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+		    for (RunningServiceInfo runningServiceInfo : activityManager.getRunningServices(Integer.MAX_VALUE)) {
+		        if (serviceName.equals(runningServiceInfo.service.getClassName())) {
+		        	return true;
+		        }
+		    }
+		    return false;
+	}
+
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		//Todos by Sudhaker
+		
+		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		boolean serviceShouldStart =  SP.getBoolean("enableSpeedTickerService", true);
+		
 		Toast.makeText(this, "Preferences changed", Toast.LENGTH_LONG).show();
 		Intent iServ = new Intent();
 		iServ.setClass(this, SpeedTrackingService.class); 
-		this.stopService(iServ);
-		this.startService(iServ);
+		
+		if(serviceShouldStart = true) {
+			this.stopService(iServ);
+			this.startService(iServ);
+		} else {
+			this.stopService(iServ);
+		}
+		
+
+
 	}
 }

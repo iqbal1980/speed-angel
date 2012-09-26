@@ -3,11 +3,13 @@ package com.mobilityspot;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 public class SpeedTrackingService extends Service implements LocationListener {
 	private LocationManager locationManager;
 	private String provider;
+	private Double speedThreshold;
  
    @Override
     public IBinder onBind(Intent intent) {
@@ -23,14 +26,29 @@ public class SpeedTrackingService extends Service implements LocationListener {
 
     @Override
     public void onCreate() {
+    	SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		String speedUnit = SP.getString("listOfSpeedUnits", "m/s");
+		
+		if(speedUnit.equals("mph")) {
+			speedThreshold = SpeedUnitsConversion.mphToMeterPerSecond(SP.getInt("listOfSpeeds", 2)) ;
+		}
+		if(speedUnit.equals("kph")) {
+			speedThreshold = SpeedUnitsConversion.kphToMeterPerSecond(SP.getInt("listOfSpeeds", 2)) ;
+		}
+		if(speedUnit.equals("m/s")) {
+			speedThreshold =  Double.valueOf(SP.getString("listOfSpeeds", "2"));
+		}
+		
+		Toast.makeText(this, "Speed threshold  = " + speedThreshold, Toast.LENGTH_LONG).show();
+		
     	System.out.println("Speed Retriever service created");
 		locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if(!isGpsEnabled){
+        if(!isGpsEnabled) {
         	System.out.println("GPS not enabled");
         	Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         	startActivity(intent);
-        }else{
+        } else {
         	System.out.println("GPS is enabled, proceeding..");
         	Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, this);
@@ -54,8 +72,8 @@ public class SpeedTrackingService extends Service implements LocationListener {
  
          ActivityOrderingSingleton sgl = ActivityOrderingSingleton.getInstance();
          System.out.println(">>>>>>>>>>>>>> Speed ===== *****"+speedStr +"SINGLETON ON ===" +sgl.isActivityOnTop);
-		 
-         if(speedDbl > -1) { 
+         
+         if(speedDbl > speedThreshold) { 
 			 if(sgl.isActivityOnTop == false) {
 		         Intent iExp = new Intent(this, ScreenBlockingActivity.class);
 		         iExp.putExtra("speed1", speedStr);
