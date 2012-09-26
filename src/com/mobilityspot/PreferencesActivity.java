@@ -18,6 +18,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 /***
  * PreferenceActivity is a built-in Activity for preferences management
@@ -36,17 +38,18 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.samplepreferences);
-		
+		SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+
+			prefs.registerOnSharedPreferenceChangeListener(this);
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key) {
-				//Todos by Sudhaker
-				Intent iServ = new Intent();
-				iServ.setClass(this, SpeedTrackingService.class); 
-				this.stopService(iServ);
-				this.startService(iServ);
-		
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+		//Todos by Sudhaker
+		Toast.makeText(this, "Preferences changed", Toast.LENGTH_LONG).show();
+		Intent iServ = new Intent();
+		iServ.setClass(this, SpeedTrackingService.class); 
+		this.stopService(iServ);
+		this.startService(iServ);
 	}
 }
