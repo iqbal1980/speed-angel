@@ -31,7 +31,7 @@
     <string-array name="speedUnits">
         <item>mph</item>
         <item>kph</item>
-        <item>m/s</item>
+        <item>ms</item>
     </string-array>
     <color name="white">#FFFFFF</color>
 </resources>

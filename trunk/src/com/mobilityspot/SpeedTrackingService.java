@@ -17,7 +17,7 @@ import android.widget.Toast;
 public class SpeedTrackingService extends Service implements LocationListener {
 	private LocationManager locationManager;
 	private String provider;
-	private Double speedThreshold;
+	private double speedThreshold;
  
    @Override
     public IBinder onBind(Intent intent) {
@@ -27,18 +27,23 @@ public class SpeedTrackingService extends Service implements LocationListener {
     @Override
     public void onCreate() {
     	SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		String speedUnit = SP.getString("listOfSpeedUnits", "m/s");
+		String speedUnit = SP.getString("listOfSpeedUnits", "ms");
+		
+		Toast.makeText(this, "Speed unit  **** >>>>>>>" + speedUnit, Toast.LENGTH_LONG).show();
+		double speedThresholdTmp = Double.valueOf(SP.getString("listOfSpeeds", "2"));
+		Toast.makeText(this, "Threshold in double ==== >>>>>>>" + speedThresholdTmp, Toast.LENGTH_LONG).show();
 		
 		if(speedUnit.equals("mph")) {
-			speedThreshold = SpeedUnitsConversion.mphToMeterPerSecond(SP.getInt("listOfSpeeds", 2)) ;
+			speedThreshold = SpeedUnitsConversion.mphToMeterPerSecond(speedThresholdTmp) ;
 		}
 		if(speedUnit.equals("kph")) {
-			speedThreshold = SpeedUnitsConversion.kphToMeterPerSecond(SP.getInt("listOfSpeeds", 2)) ;
+			speedThreshold = SpeedUnitsConversion.kphToMeterPerSecond(speedThresholdTmp) ;
 		}
-		if(speedUnit.equals("m/s")) {
-			speedThreshold =  Double.valueOf(SP.getString("listOfSpeeds", "2"));
+		if(speedUnit.equals("ms")) {
+			speedThreshold =  speedThresholdTmp;
 		}
 		
+		//speedThreshold = (double) (-1);
 		Toast.makeText(this, "Speed threshold  = " + speedThreshold, Toast.LENGTH_LONG).show();
 		
     	System.out.println("Speed Retriever service created");
@@ -111,6 +116,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 	@Override
 	public int onStartCommand (Intent intent, int flags, int startId) {
