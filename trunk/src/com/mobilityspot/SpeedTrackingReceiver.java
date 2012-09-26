@@ -15,8 +15,17 @@ public class SpeedTrackingReceiver extends BroadcastReceiver {
 		iServ.setClass(context, SpeedTrackingService.class); 
 		context.startService(iServ);///Calls another activity, by name, without passing data
 		 */
-		Intent iExp = new Intent(context, SplashScreenActivity.class); 
-		context.startActivity(iExp);
+		
+		try {
+			Intent iExp = new Intent(context, SplashScreenActivity.class); 
+			//Adding FLAG_ACTIVITY_NEW_TASK to get rid of this error messagE:
+			//Exception: Calling startActivity() from outside of an Activity
+			//context requires the FLAG_ACTIVITY_NEW_TASK flas. Is this really what you want?
+			iExp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			context.startActivity(iExp);
+		} catch(Exception err) {
+			
+		}
 		
 		
 	}

@@ -17,6 +17,12 @@ public class SplashScreenActivity extends Activity {
         
         // thread for displaying the SplashScreen
         Thread splashTread = new Thread() {
+        	private volatile Thread blinker;
+
+            public void safeNonDeprecatedStop() {
+                blinker = null;
+            }
+            
             @Override
             public void run() {
                 try {
@@ -32,7 +38,8 @@ public class SplashScreenActivity extends Activity {
                 } finally {
                     finish();
                     startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
-                    stop();
+                    //stop();//<--- This a Thread depecrated method use safeNonDeprecatedStop() instead. See above.
+                    safeNonDeprecatedStop();
                 }
             }
         };
