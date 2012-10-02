@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class ScreenBlockingActivity extends Activity {
  
 	public TextView tv;
-	public ActivityOrderingSingleton sgl2 = ActivityOrderingSingleton.getInstance();
+	public ActivityOnTopStatusSingleton sgl2 = ActivityOnTopStatusSingleton.getInstance();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
