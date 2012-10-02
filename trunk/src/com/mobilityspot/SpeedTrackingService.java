@@ -75,7 +75,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
          String speedStr = Double.toString(speedDbl);
 
  
-         ActivityOrderingSingleton sgl = ActivityOrderingSingleton.getInstance();
+         ActivityOnTopStatusSingleton sgl = ActivityOnTopStatusSingleton.getInstance();
          System.out.println(">>>>>>>>>>>>>> Speed ===== *****"+speedStr +"SINGLETON ON ===" +sgl.isActivityOnTop);
          
          if(speedDbl > speedThreshold) { 
