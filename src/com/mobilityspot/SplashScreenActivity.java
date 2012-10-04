@@ -1,8 +1,11 @@
 package com.mobilityspot;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.MotionEvent;
 
 public class SplashScreenActivity extends Activity {
@@ -37,7 +40,16 @@ public class SplashScreenActivity extends Activity {
                     // do nothing
                 } finally {
                     finish();
-                    startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
+            		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                    boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+                    
+                    if(!isGpsEnabled) {
+                    	System.out.println("GPS not enabled");
+                    	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    	startActivity(intentGps);
+                    } else {
+                    	startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
+                    }
                     //stop();//<--- This a Thread depecrated method use safeNonDeprecatedStop() instead. See above.
                     safeNonDeprecatedStop();
                 }

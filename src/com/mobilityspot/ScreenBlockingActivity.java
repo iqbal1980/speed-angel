@@ -5,9 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.widget.TextView;
 
@@ -23,30 +21,22 @@ public class ScreenBlockingActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		sgl2.isActivityOnTop = true;
+        setContentView(R.layout.blocker);
+        Intent sender=getIntent();
+        String extraDataMPS = sender.getExtras().getString("speed1");
+        String extraDataKPH = SpeedUnitsConversion.mpsToKph(extraDataMPS);
+        String extraDataMPH = SpeedUnitsConversion.mpsToMph(extraDataMPS);
         
-        if(!isGpsEnabled) {
-        	System.out.println("GPS not enabled");
-        	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        	startActivity(intentGps);
-        } else {
-			sgl2.isActivityOnTop = true;
-	        setContentView(R.layout.blocker);
-	        Intent sender=getIntent();
-	        String extraDataMPS = sender.getExtras().getString("speed1");
-	        String extraDataKPH = SpeedUnitsConversion.mpsToKph(extraDataMPS);
-	        String extraDataMPH = SpeedUnitsConversion.mpsToMph(extraDataMPS);
-	        
-	        tvMps = (TextView)  findViewById(R.id.textView_mps);
-	        tvMps.setText(extraDataMPS);
-	        
-	        tvKph = (TextView)  findViewById(R.id.textView_kph);
-	        tvKph.setText(extraDataKPH);
-	        
-	        tvMph = (TextView)  findViewById(R.id.textView_mph);
-	        tvMph.setText(extraDataMPH);
-        }
+        tvMps = (TextView)  findViewById(R.id.textView_mps);
+        tvMps.setText(extraDataMPS);
+        
+        tvKph = (TextView)  findViewById(R.id.textView_kph);
+        tvKph.setText(extraDataKPH);
+        
+        tvMph = (TextView)  findViewById(R.id.textView_mph);
+        tvMph.setText(extraDataMPH);
+        
         //LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("speedExceeded"));
 	}
 	
