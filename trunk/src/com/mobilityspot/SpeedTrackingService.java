@@ -53,6 +53,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
         	System.out.println("GPS not enabled");
         	Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         	startActivity(intent);
+        	stopSelf();
         } else {
         	System.out.println("GPS is enabled, proceeding..");
         	Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -99,10 +100,10 @@ public class SpeedTrackingService extends Service implements LocationListener {
 
 	@Override
 	public void onProviderDisabled(String provider) {
+		stopSelf();
 		Toast.makeText(this, "Please enable your GPS ", Toast.LENGTH_LONG).show();
     	Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
     	startActivity(intent);
-		
 	}
 
 	@Override

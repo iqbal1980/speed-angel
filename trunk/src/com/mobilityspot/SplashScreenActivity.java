@@ -47,6 +47,7 @@ public class SplashScreenActivity extends Activity {
                     	System.out.println("GPS not enabled");
                     	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     	startActivity(intentGps);
+                    	startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
                     } else {
                     	startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
                     }
