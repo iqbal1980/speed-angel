@@ -7,6 +7,7 @@
     android:background="@color/white"
     tools:context=".MainActivity"
     >
+    
 <TextView  android:id="@+id/blocktext"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
@@ -18,6 +19,30 @@
     android:layout_height="wrap_content"
     android:src="@drawable/angel" />
 
-
+<TextView
+    android:id="@+id/textView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#bbccdd"
+    android:text="Your Current Speed is:"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
+<TextView
+    android:id="@+id/textView_mps"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#bbccdd"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
+<TextView
+    android:id="@+id/textView_mph"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#bbccdd"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
+<TextView
+    android:id="@+id/textView_kph"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#bbccdd"
+    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

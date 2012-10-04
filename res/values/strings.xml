@@ -3,7 +3,8 @@
     <string name="hello">Hello World</string>
     <string name="app_name">Speed Angel</string>
     <string name="sample_pref_click_pop_up">Click to pop up a list to choose from</string>
-    <string name="sample_pref_sel_dialog">Select max allowable speed limit</string>
+    <string name="sample_pref_sel_dialog">Maximum Speed</string>
+    <string name="sample_pref_sel_dialog_speed_unit">Speed Unit</string>
     <string name="sample_pref_choose_number">Choose speed limit</string>
     <string name="sample_pref_choose_speed_unit">Choose speed unit</string>
     <string name="sample_pref_check_it">Check It</string>
