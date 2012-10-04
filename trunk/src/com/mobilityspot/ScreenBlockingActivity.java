@@ -11,7 +11,10 @@ import android.widget.TextView;
 
 public class ScreenBlockingActivity extends Activity {
  
-	public TextView tv;
+	public TextView tvMph;
+	public TextView tvKph;
+	public TextView tvMps;
+	
 	public ActivityOnTopStatusSingleton sgl2 = ActivityOnTopStatusSingleton.getInstance();
 	
 	@Override
@@ -21,9 +24,18 @@ public class ScreenBlockingActivity extends Activity {
 		sgl2.isActivityOnTop = true;
         setContentView(R.layout.blocker);
         Intent sender=getIntent();
-        String extraData = sender.getExtras().getString("speed1");
-        tv = (TextView)  findViewById(R.id.blocktext);
-        tv.setText(extraData);
+        String extraDataMPS = sender.getExtras().getString("speed1");
+        String extraDataKPH = SpeedUnitsConversion.mpsToKph(extraDataMPS);
+        String extraDataMPH = SpeedUnitsConversion.mpsToMph(extraDataMPS);
+        
+        tvMps = (TextView)  findViewById(R.id.textView_mps);
+        tvMps.setText(extraDataMPS);
+        
+        tvKph = (TextView)  findViewById(R.id.textView_kph);
+        tvKph.setText(extraDataKPH);
+        
+        tvMph = (TextView)  findViewById(R.id.textView_mph);
+        tvMph.setText(extraDataMPH);
         
         //LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("speedExceeded"));
 	}
@@ -52,9 +64,19 @@ public class ScreenBlockingActivity extends Activity {
 	    @Override
 	    public void onReceive(Context context, Intent intent) {
 	        String action = intent.getAction();
-	        String currentSpeed = intent.getStringExtra("speed");
-	         tv = (TextView)  findViewById(R.id.blocktext);
-	        tv.setText(currentSpeed);
+	        String currentSpeedMPS = intent.getStringExtra("speed");
+	        String currenSpeedKPH = SpeedUnitsConversion.mpsToKph(currentSpeedMPS);
+	        String currenSpeedMPH = SpeedUnitsConversion.mpsToMph(currentSpeedMPS);
+	         
+	        
+	        tvMps = (TextView)  findViewById(R.id.textView_mps);
+	        tvMps.setText(currentSpeedMPS + "m/s");
+	        
+	        tvKph = (TextView)  findViewById(R.id.textView_kph);
+	        tvKph.setText(currenSpeedKPH + "Kph");
+	        
+	        tvMph = (TextView)  findViewById(R.id.textView_mph);
+	        tvMph.setText(currenSpeedMPH + "Mph");
 	    }
 	};
 
