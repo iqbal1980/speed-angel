@@ -13,16 +13,9 @@ public class SpeedTrackingReceiver extends BroadcastReceiver {
 	 */
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        
-        if(!isGpsEnabled) {
-        	System.out.println("GPS not enabled");
-        	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        	context.startActivity(intent);
-        }
+
 		
-        else {
+      
 			Intent iServ = new Intent();
 			iServ.setClass(context, SpeedTrackingService.class); 
 			context.startService(iServ);///Calls another activity, by name, without passing data
@@ -38,7 +31,7 @@ public class SpeedTrackingReceiver extends BroadcastReceiver {
 			} catch(Exception err) {
 				
 			}
-        }
+         
 		
 		
 	}
