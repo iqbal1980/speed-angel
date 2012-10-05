@@ -2,11 +2,12 @@
 	<PreferenceCategory android:title="@string/sample_pref_categ_1">
 		<CheckBoxPreference android:key="enableSpeedTickerService"
 							android:title="@string/sample_pref_ckb" 
-							android:summary="@string/sample_pref_check_it" />		
+							android:summary="@string/sample_pref_check_it" 
+							android:defaultValue="false"/>		
 	</PreferenceCategory>
 
-	<PreferenceCategory android:title="@string/sample_pref_categ_3">
-							android:summary="Preference Summary"/>
+	<PreferenceCategory android:title="@string/sample_pref_categ_3" android:summary="Preference Summary">
+						
 		<ListPreference android:key="listOfSpeeds"
 						android:title="@string/sample_pref_sel_dialog" 
 						android:summary="@string/sample_pref_click_pop_up"
@@ -16,8 +17,8 @@
 	</PreferenceCategory>
 	
 	
-		<PreferenceCategory android:title="@string/speed_units_preferences">
-							android:summary="Speed Units Preferences"/>
+		<PreferenceCategory android:title="@string/speed_units_preferences" android:summary="Speed Units Preferences">
+							
 		<ListPreference android:key="listOfSpeedUnits"
 						android:title="@string/sample_pref_sel_dialog_speed_unit" 
 						android:summary="@string/sample_pref_click_pop_up"
