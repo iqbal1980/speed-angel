@@ -3,14 +3,12 @@ package com.mobilityspot;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MotionEvent;
 
-public class SplashScreenActivity extends Activity  implements OnSharedPreferenceChangeListener {
+public class SplashScreenActivity extends Activity  {
     protected boolean _active = true;
     protected int _splashTime = 5000;
     
@@ -67,11 +65,4 @@ public class SplashScreenActivity extends Activity  implements OnSharedPreferenc
         }
         return true;
     }
-
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
-			String key) {
-		startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
-		
-	}
 }

@@ -104,6 +104,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
 		Toast.makeText(this, "Please enable your GPS ", Toast.LENGTH_LONG).show();
     	Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
     	startActivity(intent);
+    	
 	}
 
 	@Override
