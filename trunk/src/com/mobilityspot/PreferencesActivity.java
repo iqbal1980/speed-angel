@@ -62,7 +62,7 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 		//Todos by Sudhaker
 		
 		SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		boolean serviceShouldStart =  SP.getBoolean("enableSpeedTickerService", true);
+		boolean serviceShouldStart =  SP.getBoolean("enableSpeedTickerService", false);
 		boolean isServiceRunning = isServiceRunning("SpeedTrackingService");
 		
 		Toast.makeText(this, "Preferences changed" + serviceShouldStart, Toast.LENGTH_LONG).show();
@@ -70,14 +70,10 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 		iServ.setClass(this, SpeedTrackingService.class); 
 		
 		if(serviceShouldStart == true) {
-			//if(isServiceRunning == true) {
-				this.stopService(iServ);
-			//}
+			this.stopService(iServ);
 			this.startService(iServ);
 		} else {
-			//if(isServiceRunning == true) {
 				this.stopService(iServ);
-			//}
 		}
 		
 
