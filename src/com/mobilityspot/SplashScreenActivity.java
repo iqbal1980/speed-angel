@@ -3,12 +3,14 @@ package com.mobilityspot;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.MotionEvent;
 
-public class SplashScreenActivity extends Activity {
+public class SplashScreenActivity extends Activity  implements OnSharedPreferenceChangeListener {
     protected boolean _active = true;
     protected int _splashTime = 5000;
     
@@ -47,7 +49,6 @@ public class SplashScreenActivity extends Activity {
                     	System.out.println("GPS not enabled");
                     	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     	startActivity(intentGps);
-                    	startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
                     } else {
                     	startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
                     }
@@ -66,4 +67,11 @@ public class SplashScreenActivity extends Activity {
         }
         return true;
     }
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
+			String key) {
+		startActivity(new Intent(SplashScreenActivity.this, PreferencesActivity.class));
+		
+	}
 }
