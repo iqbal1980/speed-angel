@@ -74,6 +74,7 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 			this.startService(iServ);
 		} else {
 				this.stopService(iServ);
+
 		}
 		
 
