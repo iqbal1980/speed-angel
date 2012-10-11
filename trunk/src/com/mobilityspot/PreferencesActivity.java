@@ -41,8 +41,9 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.samplepreferences);
 		SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
-
-			prefs.registerOnSharedPreferenceChangeListener(this);
+		
+		
+		prefs.registerOnSharedPreferenceChangeListener(this);
 	}
 	
 	private Boolean isServiceRunning(String serviceName) {
@@ -74,7 +75,6 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 			this.startService(iServ);
 		} else {
 				this.stopService(iServ);
-
 		}
 		
 
