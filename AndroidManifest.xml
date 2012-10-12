@@ -30,5 +30,6 @@
         </receiver>
         <activity android:name=".PreferencesActivity"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".QuitSplashScreenActivity"/>
     </application>
 </manifest>
