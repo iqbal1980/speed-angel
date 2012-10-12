@@ -98,15 +98,10 @@ public class SpeedTrackingService extends Service implements LocationListener {
 
     @Override
     public void onDestroy() {
-    	
-		/*Intent iExp2 = new Intent(this, ScreenBlockingActivity.class);
-		iExp2.putExtra("finish", "destoryMe");
-		iExp2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(iExp2);*/
+    	 super.onDestroy();
+ 
     	Toast.makeText(this, "Speed Tracking Service Destroyed ", Toast.LENGTH_LONG).show();
-    	Toast.makeText(this, "Thank you for using SpeedAngel ", Toast.LENGTH_LONG).show();
-    	android.os.Process.killProcess(android.os.Process.myPid());
-        super.onDestroy();
+       
         
     }
 
@@ -122,6 +117,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
          ActivityOnTopStatusSingleton sgl = ActivityOnTopStatusSingleton.getInstance();
          System.out.println(">>>>>>>>>>>>>> Speed ===== *****"+speedStr +"SINGLETON ON ===" +sgl.isActivityOnTop);
          
+         speedThreshold = 0;//<----
          if(speedDbl > speedThreshold) { 
 			 if(sgl.isActivityOnTop == false &&  showBlockActivity == true) {
 		         Intent iExp = new Intent(this, ScreenBlockingActivity.class);

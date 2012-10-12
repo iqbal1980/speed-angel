@@ -42,7 +42,15 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 		addPreferencesFromResource(R.xml.samplepreferences);
 		SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
 		
+		boolean serviceShouldStart =  prefs.getBoolean("enableSpeedTickerService", false);
 		
+		Intent iServ = new Intent();
+		iServ.setClass(this, SpeedTrackingService.class); 
+		
+		if(serviceShouldStart == true) {
+			this.stopService(iServ);
+			this.startService(iServ);
+		} 
 		prefs.registerOnSharedPreferenceChangeListener(this);
 	}
 	
@@ -75,6 +83,12 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 			this.startService(iServ);
 		} else {
 				this.stopService(iServ);
+				//Calls another activity, by name, without passing data
+
+				Intent iExp = new Intent(this, QuitSplashScreenActivity.class); //TODO  Replace 'ActivityToCall' with the class name of the activity being called
+				startActivity(iExp);
+		    	//Toast.makeText(this, "Thank you for using SpeedAngel ", Toast.LENGTH_LONG).show();
+		    	//android.os.Process.killProcess(android.os.Process.myPid());
 		}
 		
 
