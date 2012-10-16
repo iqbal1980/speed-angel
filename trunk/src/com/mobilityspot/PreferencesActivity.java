@@ -15,12 +15,15 @@ package com.mobilityspot;
 
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.widget.Toast;
 
 /***
@@ -36,24 +39,91 @@ import android.widget.Toast;
  */
 public class PreferencesActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener  {
 
+        
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		addPreferencesFromResource(R.xml.samplepreferences);
-		SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 		
-		boolean serviceShouldStart =  prefs.getBoolean("enableSpeedTickerService", false);
-		
-		Intent iServ = new Intent();
-		iServ.setClass(this, SpeedTrackingService.class); 
-		
-		if(serviceShouldStart == true) {
-			this.stopService(iServ);
-			this.startService(iServ);
-		} 
-		prefs.registerOnSharedPreferenceChangeListener(this);
+        if(!isGpsEnabled) {
+        	System.out.println("GPS not enabled");
+        	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        	startActivityForResult(intentGps, 0);
+        } else {
+			addPreferencesFromResource(R.xml.samplepreferences);
+			SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+			
+			boolean serviceShouldStart =  prefs.getBoolean("enableSpeedTickerService", false);
+			
+			Intent iServ = new Intent();
+			iServ.setClass(this, SpeedTrackingService.class); 
+			
+			if(serviceShouldStart == true) {
+				this.stopService(iServ);
+				this.startService(iServ);
+			} 
+			prefs.registerOnSharedPreferenceChangeListener(this);
+        }
 	}
 	
+	/*
+	public void onResume(Bundle savedInstanceState) {
+		super.onResume();
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+        if(!isGpsEnabled) {
+        	System.out.println("GPS not enabled");
+        	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        	startActivity(intentGps);
+        } else {
+			addPreferencesFromResource(R.xml.samplepreferences);
+			SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+			
+			boolean serviceShouldStart =  prefs.getBoolean("enableSpeedTickerService", false);
+			
+			Intent iServ = new Intent();
+			iServ.setClass(this, SpeedTrackingService.class); 
+			
+			if(serviceShouldStart == true) {
+				this.stopService(iServ);
+				this.startService(iServ);
+			} 
+			prefs.registerOnSharedPreferenceChangeListener(this);
+        }
+	}*/
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+	    super.onActivityResult(requestCode, resultCode, intent);
+
+	    if (requestCode == 0) {
+	    	LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+			boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+			
+	        if(!isGpsEnabled) {
+	        	System.out.println("GPS not enabled");
+	        	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+	        	startActivityForResult(intentGps, 0);
+	        } else {
+				addPreferencesFromResource(R.xml.samplepreferences);
+				SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+				
+				boolean serviceShouldStart =  prefs.getBoolean("enableSpeedTickerService", false);
+				
+				Intent iServ = new Intent();
+				iServ.setClass(this, SpeedTrackingService.class); 
+				
+				if(serviceShouldStart == true) {
+					this.stopService(iServ);
+					this.startService(iServ);
+				} 
+				prefs.registerOnSharedPreferenceChangeListener(this);
+	        }
+	    }
+	}
+ 
 	private Boolean isServiceRunning(String serviceName) {
 		
 		 ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
