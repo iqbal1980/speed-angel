@@ -38,7 +38,7 @@ public class ScreenBlockingActivity extends Activity {
         tvMph = (TextView)  findViewById(R.id.textView_mph);
         tvMph.setText(extraDataMPH);
         
-        if(sender.getExtras().getString("finish").trim() == "destroyMe") { finish(); }
+        //if(sender.getExtras().getString("finish").trim() == "destroyMe") { finish(); }
         //LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("speedExceeded"));
 	}
 	
@@ -47,7 +47,7 @@ public class ScreenBlockingActivity extends Activity {
 		super.onResume();
 		sgl2.isActivityOnTop = true;
 		Intent sender=getIntent();
-		if(sender.getExtras().getString("finish") == "destroyMe") { finish(); }
+		//if(sender.getExtras().getString("finish") == "destroyMe") { finish(); }
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,new IntentFilter("speedExceeded"));
 	}
 	
