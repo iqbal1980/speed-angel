@@ -144,23 +144,33 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 		boolean serviceShouldStart =  SP.getBoolean("enableSpeedTickerService", false);
 		boolean isServiceRunning = isServiceRunning("SpeedTrackingService");
 		
+		Toast.makeText(this, "Service should start" + serviceShouldStart, Toast.LENGTH_LONG).show();
+		
 		Toast.makeText(this, "Preferences changed" + serviceShouldStart, Toast.LENGTH_LONG).show();
 		Intent iServ = new Intent();
 		iServ.setClass(this, SpeedTrackingService.class); 
 		
-		if(serviceShouldStart == true) {
-			this.stopService(iServ);
-			this.startService(iServ);
-		} else {
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        
+		if(!isGpsEnabled) {
+        	System.out.println("GPS not enabled");
+        	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        	startActivityForResult(intentGps, 0);
+        } else {
+			if(serviceShouldStart == true && isServiceRunning == false) {
 				this.stopService(iServ);
-				//Calls another activity, by name, without passing data
-
-				Intent iExp = new Intent(this, QuitSplashScreenActivity.class); //TODO  Replace 'ActivityToCall' with the class name of the activity being called
-				startActivity(iExp);
-		    	//Toast.makeText(this, "Thank you for using SpeedAngel ", Toast.LENGTH_LONG).show();
-		    	//android.os.Process.killProcess(android.os.Process.myPid());
-		}
-		
+				this.startService(iServ);
+			} else {
+					this.stopService(iServ);
+					//Calls another activity, by name, without passing data
+	
+					Intent iExp = new Intent(this, QuitSplashScreenActivity.class); //TODO  Replace 'ActivityToCall' with the class name of the activity being called
+					startActivity(iExp);
+			    	//Toast.makeText(this, "Thank you for using SpeedAngel ", Toast.LENGTH_LONG).show();
+			    	//android.os.Process.killProcess(android.os.Process.myPid());
+			}
+        }
 
 
 	}
