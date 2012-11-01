@@ -81,16 +81,16 @@ public class SpeedTrackingService extends Service implements LocationListener {
 		//speedThreshold = (double) (-1);
 		Toast.makeText(this, "Speed threshold  = " + speedThreshold, Toast.LENGTH_LONG).show();
 		
-    	System.out.println("Speed Retriever service created");
+    	//System.out.println("Speed Retriever service created");
 		locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if(!isGpsEnabled) {
-        	System.out.println("GPS not enabled");
+        	//System.out.println("GPS not enabled");
         	Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         	startActivity(intent);
         	stopSelf();
         } else {
-        	System.out.println("GPS is enabled, proceeding..");
+        	//System.out.println("GPS is enabled, proceeding..");
         	Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         	locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 100, 1, this);
         }
@@ -115,7 +115,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
 
  
          ActivityOnTopStatusSingleton sgl = ActivityOnTopStatusSingleton.getInstance();
-         System.out.println(">>>>>>>>>>>>>> Speed ===== *****"+speedStr +"SINGLETON ON ===" +sgl.isActivityOnTop);
+         //System.out.println(">>>>>>>>>>>>>> Speed ===== *****"+speedStr +"SINGLETON ON ===" +sgl.isActivityOnTop);
          
          speedThreshold = 0;//<----
          if(speedDbl > speedThreshold) { 
@@ -132,7 +132,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
  
 		 }  
 		} catch(Exception err) {
-			System.out.println(">>>>>>>>>>>>>> ERROR :( ===== *****"+err.getMessage());
+			//System.out.println(">>>>>>>>>>>>>> ERROR :( ===== *****"+err.getMessage());
 		}
 		
 	}

@@ -45,7 +45,7 @@ public class SplashScreenActivity extends Activity  {
                     boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
                     
                     if(!isGpsEnabled) {
-                    	System.out.println("GPS not enabled");
+                    	//System.out.println("GPS not enabled");
                     	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                     	startActivity(intentGps);
                     } else {*/
