@@ -38,7 +38,7 @@ import android.widget.Toast;
  * Type>("<Preference Key>",<default value>);
  */
 public class PreferencesActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener  {
-
+	private boolean preferencesLoaded = false;
         
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -107,7 +107,7 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 	        	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 	        	startActivityForResult(intentGps, 0);
 	        } else {
-				addPreferencesFromResource(R.xml.samplepreferences);
+				//addPreferencesFromResource(R.xml.samplepreferences);
 				SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
 				
 				boolean serviceShouldStart =  prefs.getBoolean("enableSpeedTickerService", false);

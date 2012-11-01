@@ -44,7 +44,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
 	     break;
 	    default:
 	     showBlockActivity = true;		
-	     Toast.makeText(SpeedTrackingService.this, "default", Toast.LENGTH_SHORT).show();
+	     //Toast.makeText(SpeedTrackingService.this, "default", Toast.LENGTH_SHORT).show();
 	    }
 	   } catch (Exception e) {
 	   }
@@ -64,9 +64,9 @@ public class SpeedTrackingService extends Service implements LocationListener {
     	SharedPreferences SP = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		String speedUnit = SP.getString("listOfSpeedUnits", "ms");
 		
-		Toast.makeText(this, "Speed unit  **** >>>>>>>" + speedUnit, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Speed unit  **** >>>>>>>" + speedUnit, Toast.LENGTH_LONG).show();
 		double speedThresholdTmp = Double.valueOf(SP.getString("listOfSpeeds", "2"));
-		Toast.makeText(this, "Threshold in double ==== >>>>>>>" + speedThresholdTmp, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Threshold in double ==== >>>>>>>" + speedThresholdTmp, Toast.LENGTH_LONG).show();
 		
 		if(speedUnit.equals("mph")) {
 			speedThreshold = SpeedUnitsConversion.mphToMeterPerSecond(speedThresholdTmp) ;
@@ -79,7 +79,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
 		}
 		
 		//speedThreshold = (double) (-1);
-		Toast.makeText(this, "Speed threshold  = " + speedThreshold, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Speed threshold  = " + speedThreshold, Toast.LENGTH_LONG).show();
 		
     	//System.out.println("Speed Retriever service created");
 		locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -100,7 +100,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
     public void onDestroy() {
     	 super.onDestroy();
  
-    	Toast.makeText(this, "Speed Tracking Service Destroyed ", Toast.LENGTH_LONG).show();
+    	//Toast.makeText(this, "Speed Tracking Service Destroyed ", Toast.LENGTH_LONG).show();
        
         
     }
@@ -109,7 +109,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
 	public void onLocationChanged(Location location) {
 
 		try {
-		double speedDbl = location.getLatitude();//location.getSpeed();
+		double speedDbl = location.getSpeed();
     
          String speedStr = Double.toString(speedDbl);
 
@@ -140,7 +140,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
 	@Override
 	public void onProviderDisabled(String provider) {
 		stopSelf();
-		Toast.makeText(this, "Please enable your GPS ", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Please enable your GPS ", Toast.LENGTH_LONG).show();
     	Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
     	startActivity(intent);
     	
@@ -161,7 +161,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
 	
 	@Override
 	public int onStartCommand (Intent intent, int flags, int startId) {
-		Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Service Started", Toast.LENGTH_LONG).show();
 		 return START_STICKY;
 	
 	}
