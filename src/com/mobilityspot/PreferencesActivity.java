@@ -144,9 +144,9 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 		boolean serviceShouldStart =  SP.getBoolean("enableSpeedTickerService", false);
 		boolean isServiceRunning = isServiceRunning("SpeedTrackingService");
 		
-		Toast.makeText(this, "Service should start" + serviceShouldStart, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Service should start" + serviceShouldStart, Toast.LENGTH_LONG).show();
 		
-		Toast.makeText(this, "Preferences changed" + serviceShouldStart, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "Preferences changed" + serviceShouldStart, Toast.LENGTH_LONG).show();
 		Intent iServ = new Intent();
 		iServ.setClass(this, SpeedTrackingService.class); 
 		
