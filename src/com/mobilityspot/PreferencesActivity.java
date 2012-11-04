@@ -18,9 +18,11 @@ import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -53,16 +55,26 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
         } else {
 			addPreferencesFromResource(R.xml.samplepreferences);
 			SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+
 			
+			Toast.makeText(this, "To start Speed Angel check the checkbox", Toast.LENGTH_LONG).show();
 			boolean serviceShouldStart =  prefs.getBoolean("enableSpeedTickerService", false);
 			
+			if(serviceShouldStart == true) {
+				Editor editor = prefs.edit();
+				editor.putBoolean("enableSpeedTickerService", false);
+				editor.commit();
+				CheckBoxPreference startServiceCheckBox  = (CheckBoxPreference)findPreference("enableSpeedTickerService");
+				startServiceCheckBox.setChecked(false);
+			}
+			/*
 			Intent iServ = new Intent();
 			iServ.setClass(this, SpeedTrackingService.class); 
 			
 			if(serviceShouldStart == true) {
 				this.stopService(iServ);
 				this.startService(iServ);
-			} 
+			} */
 			prefs.registerOnSharedPreferenceChangeListener(this);
         }
 	}
@@ -107,21 +119,34 @@ public class PreferencesActivity extends PreferenceActivity implements OnSharedP
 	        	Intent intentGps = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 	        	startActivityForResult(intentGps, 0);
 	        } else {
+	        	Toast.makeText(this, "To start Speed Angel check the checkbox", Toast.LENGTH_LONG).show();
 	        	if(preferencesLoaded == false) {
 	        		addPreferencesFromResource(R.xml.samplepreferences);
 	        		preferencesLoaded = true;
 	        	}
 				SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
 				
+				//Editor editor = prefs.edit();
+				//editor.putBoolean("enableSpeedTickerService", false);
+				//editor.commit();
+				
 				boolean serviceShouldStart =  prefs.getBoolean("enableSpeedTickerService", false);
 				
+				if(serviceShouldStart == true) {
+					Editor editor = prefs.edit();
+					editor.putBoolean("enableSpeedTickerService", false);
+					editor.commit();
+					CheckBoxPreference startServiceCheckBox  = (CheckBoxPreference)findPreference("enableSpeedTickerService");
+					startServiceCheckBox.setChecked(false);
+				}
+				/*
 				Intent iServ = new Intent();
 				iServ.setClass(this, SpeedTrackingService.class); 
 				
 				if(serviceShouldStart == true) {
 					this.stopService(iServ);
 					this.startService(iServ);
-				} 
+				} */
 				prefs.registerOnSharedPreferenceChangeListener(this);
 	        }
 	    }

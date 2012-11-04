@@ -14,7 +14,6 @@ import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.widget.Toast;
 
 public class SpeedTrackingService extends Service implements LocationListener {
 	private LocationManager locationManager;
@@ -117,7 +116,7 @@ public class SpeedTrackingService extends Service implements LocationListener {
          ActivityOnTopStatusSingleton sgl = ActivityOnTopStatusSingleton.getInstance();
          //System.out.println(">>>>>>>>>>>>>> Speed ===== *****"+speedStr +"SINGLETON ON ===" +sgl.isActivityOnTop);
          
-         speedThreshold = 0;//<----
+         //speedThreshold = 0;//<----
          if(speedDbl > speedThreshold) { 
 			 if(sgl.isActivityOnTop == false &&  showBlockActivity == true) {
 		         Intent iExp = new Intent(this, ScreenBlockingActivity.class);
